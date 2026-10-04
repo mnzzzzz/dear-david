@@ -1,26 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #e9e4dd;
+  --paper: #f5f0e8;
+  --paper-dark: #ded5ca;
+  --brown: #4a3028;
+  --ink: #29221f;
+  --pink: #d88991;
+  --yellow: #d9b94c;
+  --lavender: #7774a6;
+  --blue: #8c9ab5;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "DM Mono", monospace;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--paper);
+}
+
+.paper-texture {
+  position: relative;
+}
+
+.paper-texture::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.13;
+  z-index: 50;
+
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(41, 34, 31, 0.04) 0px,
+      rgba(41, 34, 31, 0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  mix-blend-mode: multiply;
+}
+
+.paper {
+  background: var(--paper);
+  box-shadow:
+    0 4px 12px rgba(41, 34, 31, 0.08),
+    0 20px 60px rgba(41, 34, 31, 0.08);
+}
+
+.hand {
+  font-family: "Caveat", cursive;
+}
+
+.serif {
+  font-family: "Playfair Display", serif;
+}
+
+.mono {
+  font-family: "DM Mono", monospace;
+}
+
+.tape {
+  position: absolute;
+  width: 95px;
+  height: 27px;
+  background: rgba(216, 137, 145, 0.55);
+  transform: rotate(-4deg);
+  top: -13px;
+  left: 50%;
+  translate: -50%;
+  z-index: 5;
+  backdrop-filter: blur(2px);
+}
+
+.tape.yellow {
+  background: rgba(217, 185, 76, 0.55);
+}
+
+.tape.blue {
+  background: rgba(140, 154, 181, 0.55);
+}
+
+.stamp {
+  border: 2px dashed var(--brown);
+  padding: 12px;
+  transform: rotate(5deg);
+}
+
+.doodle {
+  font-family: "Caveat", cursive;
+}
+
+.fade-up {
+  animation: fadeUp 0.9s ease both;
+}
+
+.float {
+  animation: floating 4s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0) rotate(2deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .tape {
+    width: 75px;
+  }
 }
